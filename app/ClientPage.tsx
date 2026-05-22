@@ -138,17 +138,17 @@ export default function LandingPage({ images = [] }: { images?: string[] }) {
       </header>
 
       <main className="relative pt-40 pb-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-12">
-          <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
+        <div className="mx-auto max-w-4xl px-6 lg:px-12 text-center">
+          <div className="flex flex-col items-center">
             
             {/* Hero Content */}
             <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="space-y-10"
+              className="space-y-10 flex flex-col items-center"
             >
-              <div className="space-y-2">
+              <div className="space-y-4 flex flex-col items-center">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-[10px] uppercase tracking-widest text-white/40">Archive Status</span>
                   <span className="text-[10px] bg-rose-500/20 px-2 py-0.5 rounded text-rose-300 font-mono">ENCRYPTED_V2.04</span>
@@ -185,69 +185,6 @@ export default function LandingPage({ images = [] }: { images?: string[] }) {
                 Enter the Vault
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </motion.button>
-            </motion.div>
-
-            {/* Preview Card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              className="relative aspect-[4/5] w-full overflow-hidden rounded-[40px] border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl"
-            >
-              {/* Blurred Background Image Placeholder */}
-              <div className="absolute inset-0 grayscale brightness-[20%] opacity-50">
-                 <Image 
-                  src={images.length > 0 ? images[0] : "https://picsum.photos/seed/vault-preview/1200/1600"} 
-                  alt="Vault preview" 
-                  fill
-                  className="object-cover blur-3xl scale-110"
-                  referrerPolicy="no-referrer"
-                  unoptimized
-                 />
-              </div>
-
-              {/* Graphic Elements */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-12 text-center z-20">
-                <div className="absolute top-10 right-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
-                   <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#4ade80]"></div>
-                </div>
-
-                <div className="mb-8 inline-flex items-center justify-center p-6 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-500 shadow-[0_0_30px_rgba(244,63,94,0.1)]">
-                   <Lock className="h-10 w-10" />
-                </div>
-
-                <h3 className="mb-3 font-display text-4xl font-light tracking-tight uppercase">
-                  VIP <span className="font-bold">PREVIEW</span>
-                </h3>
-                
-                <p className="mb-10 max-w-xs text-sm leading-relaxed text-white/40">
-                  Syncing Archive contents... <br/>
-                  <span className="text-white/80">300+ EXCLUSIVE MEDIA TAGGED</span>
-                </p>
-
-                <div className="flex flex-col gap-4 w-full max-w-xs">
-                  <div className="w-full bg-white/10 h-1 rounded-full overflow-hidden">
-                    <div className="w-[78%] h-full bg-gradient-to-r from-rose-600 to-purple-600"></div>
-                  </div>
-                  <div className="flex justify-between text-[8px] tracking-[0.2em] font-mono text-white/30 uppercase">
-                    <span>Buffering Vault</span>
-                    <span>78% Loaded</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Status Badges */}
-              <div className="absolute bottom-10 left-10 right-10 flex items-center justify-between z-20">
-                <div className="px-4 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-[9px] uppercase font-bold tracking-widest text-white/60">
-                   4K_RES_STABLE
-                </div>
-                <div className="px-4 py-1.5 rounded-full bg-rose-500/20 backdrop-blur-md border border-rose-500/30 text-[9px] uppercase font-bold tracking-widest text-rose-300">
-                   Locked
-                </div>
-              </div>
-
-              {/* Glossy Overlay */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90" />
             </motion.div>
 
           </div>
