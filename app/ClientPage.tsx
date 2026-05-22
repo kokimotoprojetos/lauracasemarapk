@@ -1,14 +1,113 @@
 'use client';
 
-import { motion } from 'motion/react';
-import { Lock, ArrowRight, Star, Youtube, Instagram, Twitter } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Lock, ArrowRight, Star, Youtube, Instagram, Twitter, Flame } from 'lucide-react';
 import Image from 'next/image';
 
 export default function LandingPage({ images = [] }: { images?: string[] }) {
+  const [hasEntered, setHasEntered] = useState(false);
+  const [name, setName] = useState('');
+  const [age, setAge] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
+  useEffect(() => {
+    setIsMounted(true);
+    if (localStorage.getItem('vault_unlocked') === 'true') {
+      setHasEntered(true);
+    }
+  }, []);
+
+  const handleUnlock = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !age) return;
+    setLoading(true);
+    try {
+      await fetch('/api/visitors', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, age })
+      });
+    } catch (err) {
+      console.error(err);
+    }
+    localStorage.setItem('vault_unlocked', 'true');
+    setHasEntered(true);
+    setLoading(false);
+  };
+
+  if (!isMounted) return null;
 
   return (
-    <div className="min-h-screen bg-[#050505] font-sans selection:bg-rose-500 selection:text-white overflow-x-hidden">
+    <div className={`min-h-screen bg-[#050505] font-sans selection:bg-rose-500 selection:text-white overflow-x-hidden ${!hasEntered ? 'h-screen overflow-hidden' : ''}`}>
+      <AnimatePresence>
+        {!hasEntered && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/80 backdrop-blur-3xl"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              className="w-full max-w-lg p-8 md:p-12 bg-white/5 rounded-[40px] border border-white/10 shadow-2xl relative overflow-hidden"
+            >
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-500 via-rose-500 to-purple-600"></div>
+              
+              <div className="flex justify-center mb-6">
+                <div className="p-4 bg-orange-500/10 rounded-full border border-orange-500/30 animate-pulse">
+                  <Flame className="w-10 h-10 text-orange-500" />
+                </div>
+              </div>
+
+              <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-6 uppercase tracking-tight">
+                🔥🌶️ Parabéns! Você está prestes a acessar as minhas prévias! 🌶️🔥
+              </h2>
+              
+              <p className="text-white/60 text-center text-sm mb-8">
+                Me informe seu nome e idade para confirmar sua entrada.
+              </p>
+
+              <form onSubmit={handleUnlock} className="space-y-5">
+                <div>
+                  <label className="block text-[10px] uppercase tracking-widest text-white/50 mb-2">Seu Nome</label>
+                  <input 
+                    type="text" 
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-4 text-white outline-none focus:border-orange-500 transition-colors"
+                    placeholder="Como devo te chamar?"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] uppercase tracking-widest text-white/50 mb-2">Sua Idade</label>
+                  <input 
+                    type="number" 
+                    value={age}
+                    onChange={(e) => setAge(e.target.value)}
+                    className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-4 text-white outline-none focus:border-orange-500 transition-colors"
+                    placeholder="Qual a sua idade?"
+                    min="18"
+                    required
+                  />
+                </div>
+
+                <button 
+                  type="submit" 
+                  disabled={loading}
+                  className="w-full mt-4 flex items-center justify-center gap-2 bg-gradient-to-r from-orange-600 to-rose-600 text-white font-bold tracking-widest uppercase text-xs py-5 rounded-xl shadow-[0_0_20px_rgba(244,63,94,0.3)] hover:shadow-[0_0_40px_rgba(244,63,94,0.5)] transition-all disabled:opacity-50"
+                >
+                  {loading ? 'Acessando...' : 'Acessar Prévias'}
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       {/* Dramatic Background Glows */}
       <div className="fixed top-[-20%] left-[-10%] w-[50%] h-[60%] bg-rose-900/20 blur-[120px] rounded-full -z-10"></div>
       <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[50%] bg-purple-900/20 blur-[100px] rounded-full -z-10"></div>
