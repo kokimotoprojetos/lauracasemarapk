@@ -63,7 +63,7 @@ export default function LandingPage({ images = [] }: { images?: string[] }) {
               <div className="relative p-6 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-xl group">
                 <div className="absolute left-0 top-0 h-full w-1 bg-rose-500 rounded-full"></div>
                 <p className="text-lg italic leading-relaxed text-white/70 pl-4">
-                  "Bem-vindo ao meu mundo privado. Archive 01 pronto para visualização. Conteúdos sem censura e sem limites."
+                  "Bem vindo as minhas previas"
                 </p>
               </div>
 
