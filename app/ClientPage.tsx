@@ -175,7 +175,7 @@ export default function LandingPage({ images = [] }: { images?: string[] }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "0px 0px -50px 0px" }}
                 transition={{ duration: 0.5, delay: (i % 10) * 0.1 }}
-                className="relative w-full break-inside-avoid rounded-2xl overflow-hidden border border-white/10 group bg-white/5"
+                className="relative w-full break-inside-avoid rounded-2xl overflow-hidden border border-white/10 group bg-white/5 -mb-[15%] shadow-[0_-10px_20px_rgba(0,0,0,0.5)]"
               >
                 <div className="relative w-full">
                   <img 
@@ -184,7 +184,7 @@ export default function LandingPage({ images = [] }: { images?: string[] }) {
                     loading={i < 8 ? "eager" : "lazy"}
                     fetchPriority={i < 8 ? "high" : "auto"}
                     decoding="async"
-                    className="w-full h-auto object-cover -mt-[15%] transition-transform duration-700 group-hover:scale-105" 
+                    className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105" 
                   />
                   {/* Glossy Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
