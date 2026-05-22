@@ -1,10 +1,16 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Lock, ArrowRight, Star, Youtube, Instagram, Twitter } from 'lucide-react';
 import Image from 'next/image';
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
 export default function LandingPage({ images = [] }: { images?: string[] }) {
+  const [index, setIndex] = useState(-1);
+  const slides = images.map((src) => ({ src }));
+
   return (
     <div className="min-h-screen bg-[#050505] font-sans selection:bg-rose-500 selection:text-white overflow-x-hidden">
       {/* Dramatic Background Glows */}
@@ -173,7 +179,8 @@ export default function LandingPage({ images = [] }: { images?: string[] }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "0px 0px -50px 0px" }}
                 transition={{ duration: 0.5, delay: (i % 10) * 0.1 }}
-                className="relative w-full break-inside-avoid rounded-2xl overflow-hidden border border-white/10 group bg-white/5"
+                className="relative w-full break-inside-avoid rounded-2xl overflow-hidden border border-white/10 group bg-white/5 cursor-pointer"
+                onClick={() => setIndex(i)}
               >
                 <div className="relative w-full">
                   <img 
@@ -195,6 +202,15 @@ export default function LandingPage({ images = [] }: { images?: string[] }) {
           </div>
         </div>
       </section>
+
+      <Lightbox
+        open={index >= 0}
+        index={index}
+        close={() => setIndex(-1)}
+        slides={slides}
+        animation={{ swipe: 250 }}
+        styles={{ container: { backgroundColor: "rgba(5, 5, 5, 0.98)", backdropFilter: "blur(10px)" } }}
+      />
 
       {/* Metadata Footer Area */}
       <footer className="border-t border-white/10 bg-[#050505] pt-12 pb-20">
