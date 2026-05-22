@@ -1,0 +1,6 @@
+{
+  "name": "Laura Casemar VIP",
+  "description": "Página oficial de conteúdo exclusivo e acesso ao grupo VIP.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
