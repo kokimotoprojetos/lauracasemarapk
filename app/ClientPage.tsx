@@ -186,7 +186,9 @@ export default function LandingPage({ images = [] }: { images?: string[] }) {
                   <img 
                     src={src} 
                     alt={`Preview ${i + 1}`} 
-                    loading="lazy"
+                    loading={i < 8 ? "eager" : "lazy"}
+                    fetchPriority={i < 8 ? "high" : "auto"}
+                    decoding="async"
                     className="w-full h-auto object-cover -mb-[15%] transition-transform duration-700 group-hover:scale-105" 
                   />
                   {/* Glossy Overlay */}
