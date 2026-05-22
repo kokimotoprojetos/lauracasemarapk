@@ -175,7 +175,7 @@ export default function LandingPage({ images = [] }: { images?: string[] }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "0px 0px -50px 0px" }}
                 transition={{ duration: 0.5, delay: (i % 10) * 0.1 }}
-                className="relative w-full break-inside-avoid rounded-2xl overflow-hidden border border-white/10 group bg-white/5 -mb-[15%] shadow-[0_-10px_20px_rgba(0,0,0,0.5)]"
+                className="relative w-full break-inside-avoid rounded-2xl overflow-hidden border border-white/10 group bg-white/5"
               >
                 <div className="relative w-full">
                   <img 
@@ -186,8 +186,10 @@ export default function LandingPage({ images = [] }: { images?: string[] }) {
                     decoding="async"
                     className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105" 
                   />
+                  {/* Watermark Cover */}
+                  <div className="absolute bottom-0 left-0 right-0 h-[12%] bg-[#050505] z-10"></div>
                   {/* Glossy Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-20">
                     <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
                       <span className="text-[10px] font-bold tracking-widest text-white uppercase drop-shadow-md">FILE_{i.toString().padStart(4, '0')}</span>
                       <Lock className="w-3 h-3 text-rose-500 drop-shadow-md" />
