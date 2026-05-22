@@ -189,12 +189,7 @@ export default function LandingPage({ images = [] }: { images?: string[] }) {
                   {/* Watermark Cover */}
                   <div className="absolute bottom-0 left-0 right-0 h-[12%] bg-[#050505] z-10"></div>
                   {/* Glossy Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-20">
-                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                      <span className="text-[10px] font-bold tracking-widest text-white uppercase drop-shadow-md">FILE_{i.toString().padStart(4, '0')}</span>
-                      <Lock className="w-3 h-3 text-rose-500 drop-shadow-md" />
-                    </div>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-20 pointer-events-none"></div>
                 </div>
               </motion.div>
             ))}
