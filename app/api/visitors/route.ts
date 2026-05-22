@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     };
     
     // Fetch current data
-    const getRes = await fetch(DB_URL);
+    const getRes = await fetch(DB_URL, { cache: 'no-store' });
     const currentDb = await getRes.json();
     const users = currentDb?.data?.users || [];
     
